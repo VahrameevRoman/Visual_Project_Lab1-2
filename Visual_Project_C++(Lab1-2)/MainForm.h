@@ -74,23 +74,7 @@ namespace VisualProjectCLab12 {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xColomn;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FColomn;
 
-
-
-
-
-
-
-
-
-
-
 	private: System::ComponentModel::IContainer^ components;
-
-
-
-
-
-
 
 	protected:
 
