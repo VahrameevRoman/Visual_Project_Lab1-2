@@ -9,6 +9,11 @@ namespace VisualProjectCLab12 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 
+	using namespace System::IO;  //для ввода/вывода 
+	using namespace System::Text;
+
+	double GetF(double a, double b, double c, double x);
+
 	/// <summary>
 	/// Сводка для MainForm
 	/// </summary>
@@ -73,12 +78,13 @@ namespace VisualProjectCLab12 {
 	private: System::Windows::Forms::DataGridView^ dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xColomn;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FColomn;
-
+	private: System::Windows::Forms::FontDialog^ fontDialog1;
+	private: System::Windows::Forms::ColorDialog^ colorDialog1;
+	private: System::Windows::Forms::SaveFileDialog^ saveFileDialog1;
 	private: System::ComponentModel::IContainer^ components;
 
 	protected:
-
-	private:
+	private: 
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
@@ -125,6 +131,9 @@ namespace VisualProjectCLab12 {
 			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
 			this->xColomn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->FColomn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->fontDialog1 = (gcnew System::Windows::Forms::FontDialog());
+			this->colorDialog1 = (gcnew System::Windows::Forms::ColorDialog());
+			this->saveFileDialog1 = (gcnew System::Windows::Forms::SaveFileDialog());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
@@ -307,18 +316,21 @@ namespace VisualProjectCLab12 {
 			this->цветТекстаToolStripMenuItem->Name = L"цветТекстаToolStripMenuItem";
 			this->цветТекстаToolStripMenuItem->Size = System::Drawing::Size(257, 30);
 			this->цветТекстаToolStripMenuItem->Text = L"Цвет текста";
+			this->цветТекстаToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::цветТекстаToolStripMenuItem_Click);
 			// 
 			// параметрыШрифтаToolStripMenuItem
 			// 
 			this->параметрыШрифтаToolStripMenuItem->Name = L"параметрыШрифтаToolStripMenuItem";
 			this->параметрыШрифтаToolStripMenuItem->Size = System::Drawing::Size(257, 30);
 			this->параметрыШрифтаToolStripMenuItem->Text = L"Параметры шрифта";
+			this->параметрыШрифтаToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::параметрыШрифтаToolStripMenuItem_Click);
 			// 
 			// сохранитьToolStripMenuItem
 			// 
 			this->сохранитьToolStripMenuItem->Name = L"сохранитьToolStripMenuItem";
 			this->сохранитьToolStripMenuItem->Size = System::Drawing::Size(257, 30);
 			this->сохранитьToolStripMenuItem->Text = L"Сохранить";
+			this->сохранитьToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::сохранитьToolStripMenuItem_Click);
 			// 
 			// графикToolStripMenuItem
 			// 
@@ -357,15 +369,15 @@ namespace VisualProjectCLab12 {
 			// очиститьПоляToolStripMenuItem
 			// 
 			this->очиститьПоляToolStripMenuItem->Name = L"очиститьПоляToolStripMenuItem";
-			this->очиститьПоляToolStripMenuItem->Size = System::Drawing::Size(166, 29);
-			this->очиститьПоляToolStripMenuItem->Text = L"Очистить поля+";
+			this->очиститьПоляToolStripMenuItem->Size = System::Drawing::Size(153, 29);
+			this->очиститьПоляToolStripMenuItem->Text = L"Очистить поля";
 			this->очиститьПоляToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::очиститьПоляToolStripMenuItem_Click);
 			// 
 			// обАвтореToolStripMenuItem
 			// 
 			this->обАвтореToolStripMenuItem->Name = L"обАвтореToolStripMenuItem";
-			this->обАвтореToolStripMenuItem->Size = System::Drawing::Size(127, 29);
-			this->обАвтореToolStripMenuItem->Text = L"Об авторе+";
+			this->обАвтореToolStripMenuItem->Size = System::Drawing::Size(114, 29);
+			this->обАвтореToolStripMenuItem->Text = L"Об авторе";
 			this->обАвтореToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::обАвтореToolStripMenuItem_Click);
 			// 
 			// groupBox1
@@ -380,7 +392,6 @@ namespace VisualProjectCLab12 {
 			this->groupBox1->TabIndex = 17;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Выберите:";
-			this->radioButtonCalculationPoint->Checked = true;
 			// 
 			// radioButtonCalculationInterval
 			// 
@@ -398,6 +409,7 @@ namespace VisualProjectCLab12 {
 			// radioButtonCalculationPoint
 			// 
 			this->radioButtonCalculationPoint->AutoSize = true;
+			this->radioButtonCalculationPoint->Checked = true;
 			this->radioButtonCalculationPoint->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
 				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
 			this->radioButtonCalculationPoint->Location = System::Drawing::Point(6, 25);
@@ -492,6 +504,20 @@ private: System::Void построитьToolStripMenuItem_Click(System::Object^ sender, S
 				"Ошибка",
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Information);
+			return;
+		}
+		else //рассчитываем в точке
+		{
+			//изначально очищаем таблицу
+			this->dataGridView1->Rows->Clear();
+			this->dataGridView1->Refresh();
+
+			double a = System::Convert::ToDouble(this->aBox->Text);
+			double b = System::Convert::ToDouble(this->bBox->Text);
+			double c = System::Convert::ToDouble(this->cBox->Text);
+			double x = System::Convert::ToDouble(this->xBox->Text);
+			double f = GetF(a, b, c, x);
+			this->dataGridView1->Rows->Add(x, f);
 		}
 	}
 	else if (this->radioButtonCalculationInterval->Checked == true) //при расчёте на интервале
@@ -507,8 +533,82 @@ private: System::Void построитьToolStripMenuItem_Click(System::Object^ sender, S
 				"Ошибка",
 				MessageBoxButtons::OK,
 				MessageBoxIcon::Information);
+			return;
+		}
+		else //рассчитываем на интервале
+		{
+			//изначально очищаем таблицу
+			this->dataGridView1->Rows->Clear();
+			this->dataGridView1->Refresh();
+
+			double a = System::Convert::ToDouble(this->aBox->Text);
+			double b = System::Convert::ToDouble(this->bBox->Text);
+			double c = System::Convert::ToDouble(this->cBox->Text);
+			double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
+			double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
+
+			int amountDivisions = 10;//количество делений
+			double step = (xEnd - xBegin) / amountDivisions;
+			for (int i = 0; i < amountDivisions+1; i++)
+			{
+				double x = xBegin + step*i;
+				double f = GetF(a, b, c, x);
+				this->dataGridView1->Rows->Add(x, f);
+			}
 		}
 	}
+
+}
+private: System::Void параметрыШрифтаToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->fontDialog1->ShowDialog();
+	this->dataGridView1->Font = fontDialog1->Font;
+}
+
+private: System::Void цветТекстаToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->colorDialog1->ShowDialog();
+	this->dataGridView1->ForeColor = colorDialog1->Color;
+}
+
+	   void SaveToFile(String^ File, DataGridView^ dgw1)
+	   {
+		   String^ a, ^ b;
+		   File::Delete(File);
+		   int rowCount = dgw1->RowCount;
+		   int columnCount = dgw1->ColumnCount;
+
+		   for (int i = 0; i < rowCount-1; i++)
+		   {
+			   for (int j = 0; j < columnCount; j++)
+			   {
+				   a = dgw1->Rows[i]->Cells[j]->Value->ToString();
+				   b += a->Concat(a, "\t");
+			   }
+			   b += "\n";
+		   }
+		   File::AppendAllText(File, b);
+	   }
+
+private: System::Void сохранитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+
+	this->saveFileDialog1->ShowDialog();
+	String ^a = saveFileDialog1->FileName;
+	SaveToFile(a, dataGridView1);
 }
 };
+
+double GetF(double a, double b, double c, double x)
+{
+	double f;
+	if (x < -5 && c == 0)
+	{
+		f = (1 / (a * x)) - b;
+	}
+	else if (x > -5 && c != 0)
+	{
+		f = (x - a) / x;
+	}
+	else f = ((10 * x) / (c - 4));
+	return f;
+}
+
 }
