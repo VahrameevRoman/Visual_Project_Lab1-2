@@ -28,5 +28,8 @@
     <Image Include="..\resourсes\F_picture_png.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="..\resourсes\test_graf.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
 </Project>

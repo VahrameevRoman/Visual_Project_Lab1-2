@@ -48,7 +48,7 @@ namespace VisualProjectCLab12 {
 	private: System::Windows::Forms::TextBox^ xBox;
 	private: System::Windows::Forms::TextBox^ xBeginBox;
 	private: System::Windows::Forms::TextBox^ xEndBox;
-	private: System::Windows::Forms::Button^ staryButton;
+
 	private: System::Windows::Forms::MenuStrip^ menuStrip1;
 
 	private: System::Windows::Forms::ToolStripMenuItem^ î÷èñòèòüÏîëÿToolStripMenuItem;
@@ -70,7 +70,11 @@ namespace VisualProjectCLab12 {
 	private: System::Windows::Forms::ToolStripMenuItem^ öâåòËèíèèToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^ ïàğàìåòğûØğèôòàToolStripMenuItem1;
 	private: System::Windows::Forms::ToolStripMenuItem^ öâåòÒåêñòàToolStripMenuItem1;
-	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::DataGridView^ dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ xColomn;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^ FColomn;
+
+
 
 
 
@@ -118,27 +122,29 @@ namespace VisualProjectCLab12 {
 			this->xBox = (gcnew System::Windows::Forms::TextBox());
 			this->xBeginBox = (gcnew System::Windows::Forms::TextBox());
 			this->xEndBox = (gcnew System::Windows::Forms::TextBox());
-			this->staryButton = (gcnew System::Windows::Forms::Button());
 			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->òàáëèöàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ïîñòğîèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->öâåòÒåêñòàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ïàğàìåòğûØğèôòàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ñîõğàíèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ãğàôèêToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ïîñòğîèòüToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->öâåòËèíèèToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->ïàğàìåòğûØğèôòàToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->öâåòÒåêñòàToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->î÷èñòèòüÏîëÿToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->îáÀâòîğåToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
 			this->radioButtonCalculationInterval = (gcnew System::Windows::Forms::RadioButton());
 			this->radioButtonCalculationPoint = (gcnew System::Windows::Forms::RadioButton());
-			this->òàáëèöàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ãğàôèêToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ïîñòğîèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->öâåòÒåêñòàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ïàğàìåòğûØğèôòàToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ñîõğàíèòüToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ïîñòğîèòüToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->öâåòËèíèèToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->ïàğàìåòğûØğèôòàToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->öâåòÒåêñòàToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView1 = (gcnew System::Windows::Forms::DataGridView());
+			this->xColomn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->FColomn = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->groupBox1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -281,17 +287,6 @@ namespace VisualProjectCLab12 {
 			this->xEndBox->Size = System::Drawing::Size(115, 40);
 			this->xEndBox->TabIndex = 13;
 			// 
-			// staryButton
-			// 
-			this->staryButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 36, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->staryButton->Location = System::Drawing::Point(9, 570);
-			this->staryButton->Name = L"staryButton";
-			this->staryButton->Size = System::Drawing::Size(245, 61);
-			this->staryButton->TabIndex = 14;
-			this->staryButton->Text = L"Start";
-			this->staryButton->UseVisualStyleBackColor = true;
-			// 
 			// menuStrip1
 			// 
 			this->menuStrip1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -306,57 +301,6 @@ namespace VisualProjectCLab12 {
 			this->menuStrip1->TabIndex = 15;
 			this->menuStrip1->Text = L"menuStrip1";
 			// 
-			// î÷èñòèòüÏîëÿToolStripMenuItem
-			// 
-			this->î÷èñòèòüÏîëÿToolStripMenuItem->Name = L"î÷èñòèòüÏîëÿToolStripMenuItem";
-			this->î÷èñòèòüÏîëÿToolStripMenuItem->Size = System::Drawing::Size(153, 29);
-			this->î÷èñòèòüÏîëÿToolStripMenuItem->Text = L"Î÷èñòèòü ïîëÿ";
-			// 
-			// îáÀâòîğåToolStripMenuItem
-			// 
-			this->îáÀâòîğåToolStripMenuItem->Name = L"îáÀâòîğåToolStripMenuItem";
-			this->îáÀâòîğåToolStripMenuItem->Size = System::Drawing::Size(114, 29);
-			this->îáÀâòîğåToolStripMenuItem->Text = L"Îá àâòîğå";
-			// 
-			// groupBox1
-			// 
-			this->groupBox1->Controls->Add(this->radioButtonCalculationInterval);
-			this->groupBox1->Controls->Add(this->radioButtonCalculationPoint);
-			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(204)));
-			this->groupBox1->Location = System::Drawing::Point(9, 479);
-			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(429, 85);
-			this->groupBox1->TabIndex = 17;
-			this->groupBox1->TabStop = false;
-			this->groupBox1->Text = L"Âûáåğèòå:";
-			// 
-			// radioButtonCalculationInterval
-			// 
-			this->radioButtonCalculationInterval->AutoSize = true;
-			this->radioButtonCalculationInterval->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->radioButtonCalculationInterval->Location = System::Drawing::Point(6, 48);
-			this->radioButtonCalculationInterval->Name = L"radioButtonCalculationInterval";
-			this->radioButtonCalculationInterval->Size = System::Drawing::Size(414, 24);
-			this->radioButtonCalculationInterval->TabIndex = 1;
-			this->radioButtonCalculationInterval->TabStop = true;
-			this->radioButtonCalculationInterval->Text = L"Âû÷èñëåíèå çíà÷åíèÿ ôóíêöèè íà èíòåğâàëå";
-			this->radioButtonCalculationInterval->UseVisualStyleBackColor = true;
-			// 
-			// radioButtonCalculationPoint
-			// 
-			this->radioButtonCalculationPoint->AutoSize = true;
-			this->radioButtonCalculationPoint->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
-				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
-			this->radioButtonCalculationPoint->Location = System::Drawing::Point(6, 18);
-			this->radioButtonCalculationPoint->Name = L"radioButtonCalculationPoint";
-			this->radioButtonCalculationPoint->Size = System::Drawing::Size(362, 24);
-			this->radioButtonCalculationPoint->TabIndex = 0;
-			this->radioButtonCalculationPoint->TabStop = true;
-			this->radioButtonCalculationPoint->Text = L"Âû÷èñëåíèå çíà÷åíèÿ ôóíêöèè â òî÷êå";
-			this->radioButtonCalculationPoint->UseVisualStyleBackColor = true;
-			// 
 			// òàáëèöàToolStripMenuItem
 			// 
 			this->òàáëèöàToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
@@ -367,21 +311,12 @@ namespace VisualProjectCLab12 {
 			this->òàáëèöàToolStripMenuItem->Size = System::Drawing::Size(97, 29);
 			this->òàáëèöàToolStripMenuItem->Text = L"Òàáëèöà";
 			// 
-			// ãğàôèêToolStripMenuItem
-			// 
-			this->ãğàôèêToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
-				this->ïîñòğîèòüToolStripMenuItem1,
-					this->öâåòËèíèèToolStripMenuItem, this->ïàğàìåòğûØğèôòàToolStripMenuItem1, this->öâåòÒåêñòàToolStripMenuItem1
-			});
-			this->ãğàôèêToolStripMenuItem->Name = L"ãğàôèêToolStripMenuItem";
-			this->ãğàôèêToolStripMenuItem->Size = System::Drawing::Size(87, 29);
-			this->ãğàôèêToolStripMenuItem->Text = L"Ãğàôèê";
-			// 
 			// ïîñòğîèòüToolStripMenuItem
 			// 
 			this->ïîñòğîèòüToolStripMenuItem->Name = L"ïîñòğîèòüToolStripMenuItem";
 			this->ïîñòğîèòüToolStripMenuItem->Size = System::Drawing::Size(257, 30);
 			this->ïîñòğîèòüToolStripMenuItem->Text = L"Ïîñòğîèòü";
+			this->ïîñòğîèòüToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::ïîñòğîèòüToolStripMenuItem_Click);
 			// 
 			// öâåòÒåêñòàToolStripMenuItem
 			// 
@@ -401,49 +336,123 @@ namespace VisualProjectCLab12 {
 			this->ñîõğàíèòüToolStripMenuItem->Size = System::Drawing::Size(257, 30);
 			this->ñîõğàíèòüToolStripMenuItem->Text = L"Ñîõğàíèòü";
 			// 
+			// ãğàôèêToolStripMenuItem
+			// 
+			this->ãğàôèêToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(4) {
+				this->ïîñòğîèòüToolStripMenuItem1,
+					this->öâåòËèíèèToolStripMenuItem, this->ïàğàìåòğûØğèôòàToolStripMenuItem1, this->öâåòÒåêñòàToolStripMenuItem1
+			});
+			this->ãğàôèêToolStripMenuItem->Name = L"ãğàôèêToolStripMenuItem";
+			this->ãğàôèêToolStripMenuItem->Size = System::Drawing::Size(87, 29);
+			this->ãğàôèêToolStripMenuItem->Text = L"Ãğàôèê";
+			// 
 			// ïîñòğîèòüToolStripMenuItem1
 			// 
 			this->ïîñòğîèòüToolStripMenuItem1->Name = L"ïîñòğîèòüToolStripMenuItem1";
-			this->ïîñòğîèòüToolStripMenuItem1->Size = System::Drawing::Size(257, 30);
-			this->ïîñòğîèòüToolStripMenuItem1->Text = L"Ïîñòğîèòü";
+			this->ïîñòğîèòüToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
+			this->ïîñòğîèòüToolStripMenuItem1->Text = L"Ïîñòğîèòü â íîâîì îêíå";
 			// 
 			// öâåòËèíèèToolStripMenuItem
 			// 
 			this->öâåòËèíèèToolStripMenuItem->Name = L"öâåòËèíèèToolStripMenuItem";
-			this->öâåòËèíèèToolStripMenuItem->Size = System::Drawing::Size(257, 30);
+			this->öâåòËèíèèToolStripMenuItem->Size = System::Drawing::Size(299, 30);
 			this->öâåòËèíèèToolStripMenuItem->Text = L"Öâåò ëèíèè";
 			// 
 			// ïàğàìåòğûØğèôòàToolStripMenuItem1
 			// 
 			this->ïàğàìåòğûØğèôòàToolStripMenuItem1->Name = L"ïàğàìåòğûØğèôòàToolStripMenuItem1";
-			this->ïàğàìåòğûØğèôòàToolStripMenuItem1->Size = System::Drawing::Size(257, 30);
+			this->ïàğàìåòğûØğèôòàToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
 			this->ïàğàìåòğûØğèôòàToolStripMenuItem1->Text = L"Ïàğàìåòğû øğèôòà";
 			// 
 			// öâåòÒåêñòàToolStripMenuItem1
 			// 
 			this->öâåòÒåêñòàToolStripMenuItem1->Name = L"öâåòÒåêñòàToolStripMenuItem1";
-			this->öâåòÒåêñòàToolStripMenuItem1->Size = System::Drawing::Size(257, 30);
+			this->öâåòÒåêñòàToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
 			this->öâåòÒåêñòàToolStripMenuItem1->Text = L"Öâåò òåêñòà";
 			// 
-			// label8
+			// î÷èñòèòüÏîëÿToolStripMenuItem
 			// 
-			this->label8->AutoSize = true;
-			this->label8->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+			this->î÷èñòèòüÏîëÿToolStripMenuItem->Name = L"î÷èñòèòüÏîëÿToolStripMenuItem";
+			this->î÷èñòèòüÏîëÿToolStripMenuItem->Size = System::Drawing::Size(166, 29);
+			this->î÷èñòèòüÏîëÿToolStripMenuItem->Text = L"Î÷èñòèòü ïîëÿ+";
+			this->î÷èñòèòüÏîëÿToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::î÷èñòèòüÏîëÿToolStripMenuItem_Click);
+			// 
+			// îáÀâòîğåToolStripMenuItem
+			// 
+			this->îáÀâòîğåToolStripMenuItem->Name = L"îáÀâòîğåToolStripMenuItem";
+			this->îáÀâòîğåToolStripMenuItem->Size = System::Drawing::Size(127, 29);
+			this->îáÀâòîğåToolStripMenuItem->Text = L"Îá àâòîğå+";
+			this->îáÀâòîğåToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::îáÀâòîğåToolStripMenuItem_Click);
+			// 
+			// groupBox1
+			// 
+			this->groupBox1->Controls->Add(this->radioButtonCalculationInterval);
+			this->groupBox1->Controls->Add(this->radioButtonCalculationPoint);
+			this->groupBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->label8->Location = System::Drawing::Point(507, 252);
-			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(550, 37);
-			this->label8->TabIndex = 18;
-			this->label8->Text = L"Ãğàôèê ñòğîèòñÿ â îòäåëüíîì îêíå";
+			this->groupBox1->Location = System::Drawing::Point(9, 488);
+			this->groupBox1->Name = L"groupBox1";
+			this->groupBox1->Size = System::Drawing::Size(429, 90);
+			this->groupBox1->TabIndex = 17;
+			this->groupBox1->TabStop = false;
+			this->groupBox1->Text = L"Âûáåğèòå:";
+			this->radioButtonCalculationPoint->Checked = true;
+			// 
+			// radioButtonCalculationInterval
+			// 
+			this->radioButtonCalculationInterval->AutoSize = true;
+			this->radioButtonCalculationInterval->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->radioButtonCalculationInterval->Location = System::Drawing::Point(6, 55);
+			this->radioButtonCalculationInterval->Name = L"radioButtonCalculationInterval";
+			this->radioButtonCalculationInterval->Size = System::Drawing::Size(414, 24);
+			this->radioButtonCalculationInterval->TabIndex = 1;
+			this->radioButtonCalculationInterval->TabStop = true;
+			this->radioButtonCalculationInterval->Text = L"Âû÷èñëåíèå çíà÷åíèÿ ôóíêöèè íà èíòåğâàëå";
+			this->radioButtonCalculationInterval->UseVisualStyleBackColor = true;
+			// 
+			// radioButtonCalculationPoint
+			// 
+			this->radioButtonCalculationPoint->AutoSize = true;
+			this->radioButtonCalculationPoint->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Bold,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			this->radioButtonCalculationPoint->Location = System::Drawing::Point(6, 25);
+			this->radioButtonCalculationPoint->Name = L"radioButtonCalculationPoint";
+			this->radioButtonCalculationPoint->Size = System::Drawing::Size(362, 24);
+			this->radioButtonCalculationPoint->TabIndex = 0;
+			this->radioButtonCalculationPoint->TabStop = true;
+			this->radioButtonCalculationPoint->Text = L"Âû÷èñëåíèå çíà÷åíèÿ ôóíêöèè â òî÷êå";
+			this->radioButtonCalculationPoint->UseVisualStyleBackColor = true;
+			// 
+			// dataGridView1
+			// 
+			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) {
+				this->xColomn,
+					this->FColomn
+			});
+			this->dataGridView1->Location = System::Drawing::Point(529, 52);
+			this->dataGridView1->Name = L"dataGridView1";
+			this->dataGridView1->Size = System::Drawing::Size(371, 417);
+			this->dataGridView1->TabIndex = 18;
+			// 
+			// xColomn
+			// 
+			this->xColomn->HeaderText = L"x";
+			this->xColomn->Name = L"xColomn";
+			// 
+			// FColomn
+			// 
+			this->FColomn->HeaderText = L"F";
+			this->FColomn->Name = L"FColomn";
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1140, 666);
-			this->Controls->Add(this->label8);
+			this->ClientSize = System::Drawing::Size(1140, 596);
+			this->Controls->Add(this->dataGridView1);
 			this->Controls->Add(this->groupBox1);
-			this->Controls->Add(this->staryButton);
 			this->Controls->Add(this->xEndBox);
 			this->Controls->Add(this->xBeginBox);
 			this->Controls->Add(this->xBox);
@@ -467,10 +476,55 @@ namespace VisualProjectCLab12 {
 			this->menuStrip1->PerformLayout();
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
+private: System::Void îáÀâòîğåToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	MessageBox::Show(
+		"Àâòîğ: Âàõğàìååâ Ğîìàí Àëåêñååâè÷. Ãğóïïà ÈÑÒ-21.",
+		"Îá àâòîğå");
+}
+private: System::Void î÷èñòèòüÏîëÿToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->aBox->Text = "";
+	this->bBox->Text = "";
+	this->cBox->Text = "";
+	this->xBox->Text = "";
+	this->xBeginBox->Text = "";
+	this->xEndBox->Text = "";
+}
+private: System::Void ïîñòğîèòüToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (this->radioButtonCalculationPoint->Checked == true) //ïğè ğàñ÷¸òå â òî÷êå
+	{
+		if (this->aBox->Text == "" || //ïğîâåğêà äëÿ ğàñ÷¸òà â òî÷êå
+			this->bBox->Text == "" ||
+			this->cBox->Text == "" ||
+			this->xBox->Text == "")
+		{
+			MessageBox::Show(
+				"Ââåäåíû íåêîğğåêòíûå çíà÷åíèÿ ïåğåìåííûõ äëÿ ğàñ÷¸òà â òî÷êå",
+				"Îøèáêà",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+		}
+	}
+	else if (this->radioButtonCalculationInterval->Checked == true) //ïğè ğàñ÷¸òå íà èíòåğâàëå
+	{
+		if (this->aBox->Text == "" || // ïğîâåğêà äëÿ ğàñ÷¸òà íà èíòåğâàëå
+			this->bBox->Text == "" ||
+			this->cBox->Text == "" ||
+			this->xBeginBox->Text == "" ||
+			this->xEndBox->Text == "")
+		{
+			MessageBox::Show(
+				"Ââåäåíû íåêîğğåêòíûå çíà÷åíèÿ ïåğåìåííûõ äëÿ ğàñ÷¸òà íà èíòåğâàëå",
+				"Îøèáêà",
+				MessageBoxButtons::OK,
+				MessageBoxIcon::Information);
+		}
+	}
+}
 };
 }
