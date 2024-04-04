@@ -1,4 +1,5 @@
 #pragma once
+#include "GraphForm.h"
 
 namespace VisualProjectCLab12 {
 
@@ -347,6 +348,7 @@ namespace VisualProjectCLab12 {
 			this->построитьToolStripMenuItem1->Name = L"построитьToolStripMenuItem1";
 			this->построитьToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
 			this->построитьToolStripMenuItem1->Text = L"Построить в новом окне";
+			this->построитьToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::построитьToolStripMenuItem1_Click);
 			// 
 			// цветЛинииToolStripMenuItem
 			// 
@@ -593,6 +595,48 @@ private: System::Void сохранитьToolStripMenuItem_Click(System::Object^ sender, S
 	this->saveFileDialog1->ShowDialog();
 	String ^a = saveFileDialog1->FileName;
 	SaveToFile(a, dataGridView1);
+}
+private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	if (this->aBox->Text == "" || // проверка для расчёта на интервале
+		this->bBox->Text == "" ||
+		this->cBox->Text == "" ||
+		this->xBeginBox->Text == "" ||
+		this->xEndBox->Text == "")
+	{
+		MessageBox::Show(
+			"Введены некорректные значения переменных для расчёта на интервале",
+			"Ошибка",
+			MessageBoxButtons::OK,
+			MessageBoxIcon::Information);
+		return;
+	}
+	else //рассчитываем на интервале
+	{
+
+		double a = System::Convert::ToDouble(this->aBox->Text);
+		double b = System::Convert::ToDouble(this->bBox->Text);
+		double c = System::Convert::ToDouble(this->cBox->Text);
+		double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
+		double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
+
+		int amountDivisions = 10;//количество делений
+		double step = (xEnd - xBegin) / amountDivisions;
+		
+		//открываем форму с таблицей
+		GraphForm^ graphForm = gcnew GraphForm();
+		graphForm->Show();
+		graphForm->graph->Series[0]->Points->Clear();
+
+		//расчёты для графика
+		for (int i = 0; i < amountDivisions + 1; i++)
+		{
+			double x = xBegin + step * i;
+			double f = GetF(a, b, c, x);
+			graphForm->graph->Series[0]->Points->AddXY(x, f);
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
 };
 
