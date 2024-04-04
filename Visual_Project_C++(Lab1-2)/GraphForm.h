@@ -125,6 +125,7 @@ namespace VisualProjectCLab12 {
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"GraphForm";
 			this->Text = L"GraphForm";
+			this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &GraphForm::GraphForm_MouseMove);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->graph))->EndInit();
 			this->ResumeLayout(false);
 
@@ -134,5 +135,15 @@ namespace VisualProjectCLab12 {
 	{
 		this->Hide();
 	}
+
+private: System::Drawing::Point lastPoint;
+private: System::Void GraphForm_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) 
+{
+	if (e->Button == System::Windows::Forms::MouseButtons::Left)
+	{
+		this->Left += e->X - lastPoint.X;
+		this->Top += e->Y - lastPoint.Y;
+	}
+}
 };
 }
