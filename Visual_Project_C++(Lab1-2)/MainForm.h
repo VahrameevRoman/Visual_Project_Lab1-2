@@ -14,6 +14,7 @@ namespace VisualProjectCLab12 {
 	using namespace System::Text;
 
 	double GetF(double a, double b, double c, double x);
+	void MessageShow();
 
 	/// <summary>
 	/// Сводка для MainForm
@@ -501,16 +502,12 @@ private: System::Void очиститьПоляToolStripMenuItem_Click(System::Object^ sender
 private: System::Void построитьToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (this->radioButtonCalculationPoint->Checked == true) //при расчёте в точке
 	{
-		if (this->aBox->Text == "" || //проверка для расчёта в точке
+		if (this->aBox->Text == "" || //проверка на введённое значение для расчёта в точке
 			this->bBox->Text == "" ||
 			this->cBox->Text == "" ||
 			this->xBox->Text == "")
 		{
-			MessageBox::Show(
-				"Введены некорректные значения переменных для расчёта в точке",
-				"Ошибка",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
+			MessageShow();
 			return;
 		}
 		else //рассчитываем в точке
@@ -523,23 +520,35 @@ private: System::Void построитьToolStripMenuItem_Click(System::Object^ sender, S
 			double b = System::Convert::ToDouble(this->bBox->Text);
 			double c = System::Convert::ToDouble(this->cBox->Text);
 			double x = System::Convert::ToDouble(this->xBox->Text);
+
+			if ((x < -5) && (c == 0) && (a == 0))
+			{
+				MessageShow();
+				return;
+			}
+			else if ((c != 0) && (x == 0))
+			{
+				MessageShow();
+				return;
+			}
+			else if ((c == 4) && (x <= -5))
+			{
+				MessageShow();
+				return;
+			}
 			double f = GetF(a, b, c, x);
 			this->dataGridView1->Rows->Add(x, f);
 		}
 	}
 	else if (this->radioButtonCalculationInterval->Checked == true) //при расчёте на интервале
 	{
-		if (this->aBox->Text == "" || // проверка для расчёта на интервале
+		if (this->aBox->Text == "" || // проверка для расчёта на введенное значение на интервале
 			this->bBox->Text == "" ||
 			this->cBox->Text == "" ||
 			this->xBeginBox->Text == "" ||
 			this->xEndBox->Text == "")
 		{
-			MessageBox::Show(
-				"Введены некорректные значения переменных для расчёта на интервале",
-				"Ошибка",
-				MessageBoxButtons::OK,
-				MessageBoxIcon::Information);
+			MessageShow();
 			return;
 		}
 		else //рассчитываем на интервале
@@ -553,6 +562,22 @@ private: System::Void построитьToolStripMenuItem_Click(System::Object^ sender, S
 			double c = System::Convert::ToDouble(this->cBox->Text);
 			double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
 			double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
+
+			if ((xEnd < -5) && (c == 0) && (a == 0))
+			{
+				MessageShow();
+				return;
+			}
+			else if ((c != 0) && (xBegin <= 0) && (xEnd >= 0))
+			{
+				MessageShow();
+				return;
+			}
+			else if ((c == 4) && (xBegin <= -5))
+			{
+				MessageShow();
+				return;
+			}
 
 			int amountDivisions = 10;//количество делений
 			double step = (xEnd - xBegin) / amountDivisions;
@@ -609,11 +634,7 @@ private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, 
 		this->xBeginBox->Text == "" ||
 		this->xEndBox->Text == "")
 	{
-		MessageBox::Show(
-			"Введены некорректные значения переменных для расчёта на интервале",
-			"Ошибка",
-			MessageBoxButtons::OK,
-			MessageBoxIcon::Information);
+		MessageShow();
 		return;
 	}
 	else 
@@ -624,6 +645,22 @@ private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, 
 		double c = System::Convert::ToDouble(this->cBox->Text);
 		double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
 		double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
+
+		if ((xEnd < -5) && (c == 0) && (a == 0))
+		{
+			MessageShow();
+			return;
+		}
+		else if ((c != 0) && (xBegin <= 0) && (xEnd >= 0))
+		{
+			MessageShow();
+			return;
+		}
+		else if ((c == 4) && (xBegin <= -5))
+		{
+			MessageShow();
+			return;
+		}
 
 		int amountDivisions = 10;
 		double step = (xEnd - xBegin) / amountDivisions;
@@ -671,6 +708,14 @@ double GetF(double a, double b, double c, double x)
 	}
 	else f = ((10 * x) / (c - 4));
 	return f;
+}
+void MessageShow()
+{
+	MessageBox::Show(
+		"Введены некорректные значения. Введите корректные значения переменных и повторите действие",
+		"Ошибка",
+		MessageBoxButtons::OK,
+		MessageBoxIcon::Information);
 }
 
 }
