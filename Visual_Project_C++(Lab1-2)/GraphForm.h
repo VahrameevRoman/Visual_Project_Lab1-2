@@ -35,6 +35,10 @@ namespace VisualProjectCLab12 {
 			}
 		}
 	public: System::Windows::Forms::DataVisualization::Charting::Chart^ graph;
+	private: System::Windows::Forms::Button^ exitButton;
+	public:
+
+	public:
 	protected:
 
 	protected:
@@ -62,6 +66,7 @@ namespace VisualProjectCLab12 {
 			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			System::Windows::Forms::DataVisualization::Charting::Title^ title1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Title());
 			this->graph = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->exitButton = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->graph))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -69,9 +74,13 @@ namespace VisualProjectCLab12 {
 			// 
 			chartArea1->Name = L"ChartArea1";
 			this->graph->ChartAreas->Add(chartArea1);
+			legend1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			legend1->IsTextAutoFit = false;
 			legend1->Name = L"Legend1";
+			legend1->TitleForeColor = System::Drawing::Color::IndianRed;
 			this->graph->Legends->Add(legend1);
-			this->graph->Location = System::Drawing::Point(12, 12);
+			this->graph->Location = System::Drawing::Point(14, 46);
 			this->graph->Name = L"graph";
 			series1->BorderWidth = 3;
 			series1->ChartArea = L"ChartArea1";
@@ -92,12 +101,28 @@ namespace VisualProjectCLab12 {
 			title1->Text = L"График функции F(x)";
 			this->graph->Titles->Add(title1);
 			// 
+			// exitButton
+			// 
+			this->exitButton->BackColor = System::Drawing::Color::Red;
+			this->exitButton->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 14.25F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->exitButton->ForeColor = System::Drawing::Color::White;
+			this->exitButton->Location = System::Drawing::Point(675, 3);
+			this->exitButton->Name = L"exitButton";
+			this->exitButton->Size = System::Drawing::Size(35, 37);
+			this->exitButton->TabIndex = 1;
+			this->exitButton->Text = L"X";
+			this->exitButton->UseVisualStyleBackColor = false;
+			this->exitButton->Click += gcnew System::EventHandler(this, &GraphForm::button1_Click);
+			// 
 			// GraphForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(722, 383);
+			this->ClientSize = System::Drawing::Size(718, 420);
+			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->graph);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"GraphForm";
 			this->Text = L"GraphForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->graph))->EndInit();
@@ -105,5 +130,9 @@ namespace VisualProjectCLab12 {
 
 		}
 #pragma endregion
-	};
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		this->Hide();
+	}
+};
 }

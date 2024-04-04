@@ -29,6 +29,8 @@ namespace VisualProjectCLab12 {
 			//
 		}
 
+	public: GraphForm^ graphForm = gcnew GraphForm();
+
 	protected:
 		/// <summary>
 		/// Освободить все используемые ресурсы.
@@ -346,27 +348,30 @@ namespace VisualProjectCLab12 {
 			// построитьToolStripMenuItem1
 			// 
 			this->построитьToolStripMenuItem1->Name = L"построитьToolStripMenuItem1";
-			this->построитьToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
+			this->построитьToolStripMenuItem1->Size = System::Drawing::Size(345, 30);
 			this->построитьToolStripMenuItem1->Text = L"Построить в новом окне";
 			this->построитьToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::построитьToolStripMenuItem1_Click);
 			// 
 			// цветЛинииToolStripMenuItem
 			// 
 			this->цветЛинииToolStripMenuItem->Name = L"цветЛинииToolStripMenuItem";
-			this->цветЛинииToolStripMenuItem->Size = System::Drawing::Size(299, 30);
+			this->цветЛинииToolStripMenuItem->Size = System::Drawing::Size(345, 30);
 			this->цветЛинииToolStripMenuItem->Text = L"Цвет линии";
+			this->цветЛинииToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::цветЛинииToolStripMenuItem_Click);
 			// 
 			// параметрыШрифтаToolStripMenuItem1
 			// 
 			this->параметрыШрифтаToolStripMenuItem1->Name = L"параметрыШрифтаToolStripMenuItem1";
-			this->параметрыШрифтаToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
-			this->параметрыШрифтаToolStripMenuItem1->Text = L"Параметры шрифта";
+			this->параметрыШрифтаToolStripMenuItem1->Size = System::Drawing::Size(345, 30);
+			this->параметрыШрифтаToolStripMenuItem1->Text = L"Параметры шрифта надписей";
+			this->параметрыШрифтаToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::параметрыШрифтаToolStripMenuItem1_Click);
 			// 
 			// цветТекстаToolStripMenuItem1
 			// 
 			this->цветТекстаToolStripMenuItem1->Name = L"цветТекстаToolStripMenuItem1";
-			this->цветТекстаToolStripMenuItem1->Size = System::Drawing::Size(299, 30);
-			this->цветТекстаToolStripMenuItem1->Text = L"Цвет текста";
+			this->цветТекстаToolStripMenuItem1->Size = System::Drawing::Size(345, 30);
+			this->цветТекстаToolStripMenuItem1->Text = L"Цвет текста надписей";
+			this->цветТекстаToolStripMenuItem1->Click += gcnew System::EventHandler(this, &MainForm::цветТекстаToolStripMenuItem1_Click);
 			// 
 			// очиститьПоляToolStripMenuItem
 			// 
@@ -611,7 +616,7 @@ private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, 
 			MessageBoxIcon::Information);
 		return;
 	}
-	else //рассчитываем на интервале
+	else 
 	{
 
 		double a = System::Convert::ToDouble(this->aBox->Text);
@@ -620,15 +625,14 @@ private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, 
 		double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
 		double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
 
-		int amountDivisions = 10;//количество делений
+		int amountDivisions = 10;
 		double step = (xEnd - xBegin) / amountDivisions;
 		
 		//открываем форму с таблицей
-		GraphForm^ graphForm = gcnew GraphForm();
 		graphForm->Show();
 		graphForm->graph->Series[0]->Points->Clear();
 
-		//расчёты для графика
+		
 		for (int i = 0; i < amountDivisions + 1; i++)
 		{
 			double x = xBegin + step * i;
@@ -636,7 +640,21 @@ private: System::Void построитьToolStripMenuItem1_Click(System::Object^ sender, 
 			graphForm->graph->Series[0]->Points->AddXY(x, f);
 		}
 	}
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}
+private: System::Void цветЛинииToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	this->colorDialog1->ShowDialog();
+	graphForm->graph->Series[0]->Color = colorDialog1->Color;
+}
+private: System::Void параметрыШрифтаToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	this->fontDialog1->ShowDialog();
+	graphForm->graph->Titles[0]->Font = fontDialog1->Font;
+}
+private: System::Void цветТекстаToolStripMenuItem1_Click(System::Object^ sender, System::EventArgs^ e) 
+{
+	this->colorDialog1->ShowDialog();
+	graphForm->graph->Titles[0]->ForeColor = colorDialog1->Color;
 }
 };
 
