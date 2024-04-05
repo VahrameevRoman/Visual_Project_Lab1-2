@@ -563,15 +563,16 @@ private: System::Void ïîñòðîèòüToolStripMenuItem_Click(System::Object^ sender, S
 			double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
 			double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
 
-			if ((xEnd < -5) && (c == 0) && (a == 0))
+			bool exception = false;
+
+			if ((xBegin < -5) && (c == 0) && (a == 0))
 			{
 				MessageShow();
 				return;
 			}
 			else if ((c != 0) && (xBegin <= 0) && (xEnd >= 0))
 			{
-				MessageShow();
-				return;
+				exception = true;
 			}
 			else if ((c == 4) && (xBegin <= -5))
 			{
@@ -579,11 +580,12 @@ private: System::Void ïîñòðîèòüToolStripMenuItem_Click(System::Object^ sender, S
 				return;
 			}
 
-			int amountDivisions = 10;//êîëè÷åñòâî äåëåíèé
+			int amountDivisions = 10000;//êîëè÷åñòâî äåëåíèé
 			double step = (xEnd - xBegin) / amountDivisions;
 			for (int i = 0; i < amountDivisions+1; i++)
 			{
 				double x = xBegin + step*i;
+				if ((x == 0) && (exception)) continue;
 				double f = GetF(a, b, c, x);
 				this->dataGridView1->Rows->Add(x, f);
 			}
@@ -646,15 +648,16 @@ private: System::Void ïîñòðîèòüToolStripMenuItem1_Click(System::Object^ sender, 
 		double xBegin = System::Convert::ToDouble(this->xBeginBox->Text);
 		double xEnd = System::Convert::ToDouble(this->xEndBox->Text);
 
-		if ((xEnd < -5) && (c == 0) && (a == 0))
+		bool exception = false;
+
+		if ((xBegin < -5) && (c == 0) && (a == 0))
 		{
 			MessageShow();
 			return;
 		}
 		else if ((c != 0) && (xBegin <= 0) && (xEnd >= 0))
 		{
-			MessageShow();
-			return;
+			exception = true;
 		}
 		else if ((c == 4) && (xBegin <= -5))
 		{
@@ -662,7 +665,7 @@ private: System::Void ïîñòðîèòüToolStripMenuItem1_Click(System::Object^ sender, 
 			return;
 		}
 
-		int amountDivisions = 10;
+		int amountDivisions = 10000;
 		double step = (xEnd - xBegin) / amountDivisions;
 		
 		//îòêðûâàåì ôîðìó ñ òàáëèöåé
@@ -673,6 +676,7 @@ private: System::Void ïîñòðîèòüToolStripMenuItem1_Click(System::Object^ sender, 
 		for (int i = 0; i < amountDivisions + 1; i++)
 		{
 			double x = xBegin + step * i;
+			if ((x == 0) && (exception)) continue;
 			double f = GetF(a, b, c, x);
 			graphForm->graph->Series[0]->Points->AddXY(x, f);
 		}

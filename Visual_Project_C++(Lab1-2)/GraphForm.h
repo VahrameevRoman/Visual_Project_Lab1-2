@@ -84,7 +84,7 @@ namespace VisualProjectCLab12 {
 			this->graph->Name = L"graph";
 			series1->BorderWidth = 3;
 			series1->ChartArea = L"ChartArea1";
-			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Spline;
+			series1->ChartType = System::Windows::Forms::DataVisualization::Charting::SeriesChartType::Point;
 			series1->Color = System::Drawing::Color::Red;
 			series1->Legend = L"Legend1";
 			series1->LegendText = L"F(x)";
